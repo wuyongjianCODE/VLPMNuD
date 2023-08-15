@@ -173,5 +173,4 @@ Werkzeug==2.3.6
 widgetsnbextension==4.0.8
 yacs==0.1.8
 # Editable install with no version control (yolox==0.3.0)
--e /data2/wyj/YOLOX
 zipp==3.15.0
