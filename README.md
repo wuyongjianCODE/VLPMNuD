@@ -42,7 +42,7 @@ python tools/test_grounding_net_wuap.py --config-file configs/pretrain/glip_Swin
 Caution: ```--prompt``` param here gives an example prompt obtained from [blip](to be update), you can also input other prompts.
 A json file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in range [0.15, 0.2].Then you can use the predict result (i.e. the json file) to run self-training algorithm, and you will get near SOTA score (range [0.4, 0.45]).We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2).
 
-##[Optional] Self-Training GLIP using generated raw GLIP prediction
+## [Optional] Self-Training GLIP using generated raw GLIP prediction
 We provide an alternative way to get near SOTA score, in case that you feel YOLOX-based self-training process too complicate and labor-consuming.
 You can feed raw GLIP predict back to GLIP itself, train a new GLIP model with unchanged pretrain weights(i.e. the glip_large_model.pth), and will get a better score,probably mAP in range [0.35, 0.45].You can repeat this process again and again.This optional method is actually GLIP-based self-training, rather than YOLOX-based self-training.
 It is equivalent to YOLOX-based self-training, and you may be happy to avoid building up a YOLOX project.
