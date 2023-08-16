@@ -19,6 +19,8 @@ Our project is developed based on [GLIP](https://github.com/microsoft/GLIP).
 cd sick/GLIP
 python setup.py develop
 ```
+This instruction will install a ```maskrcnn_benchmark``` libiary, which is required by GLIP.
+
 3.[Optional] We recommend to install ```transformers``` libiary from source code , which enable us to change some function inside the transformer backbone.If you have installed transformer via pip and only want to reproduce the experiment result in our paper, you can also skip this step.This option is intended for further development.
 You firstly need to uninstall transformer via pip or conda.
 Then:
