@@ -40,10 +40,24 @@ python tools/test_grounding_net_wuap.py --config-file configs/pretrain/glip_Swin
 --prompt 'rectangular black nuclei. circle black nuclei. spherical black nuclei. rectangular dark purple nuclei. circle dark purple nuclei. spherical dark purple nuclei.' TEST.IMS_PER_BATCH 1 MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR OUTPUT
 ```
 Caution: ```--prompt``` param here gives an example prompt obtained from [blip](to be update), you can also input other prompts.
-A json file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in range [0.16, 0.2].Then you can use the predict result (i.e. the json file) to run self-training algorithm, and you will get near SOTA score (range [0.4, 0.45]).We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2).
+A json file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in range [0.15, 0.2].Then you can use the predict result (i.e. the json file) to run self-training algorithm, and you will get near SOTA score (range [0.4, 0.45]).We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2).
 
+##[Optional] Self-Training GLIP using generated raw GLIP prediction
+We provide an alternative way to get near SOTA score, in case that you feel YOLOX-based self-training process too complicate and labor-consuming.
+You can feed raw GLIP predict back to GLIP itself, train a new GLIP model with unchanged pretrain weights(i.e. the glip_large_model.pth), and will get a better score,probably mAP in range [0.35, 0.45].You can repeat this process again and again.This optional method is actually GLIP-based self-training, rather than YOLOX-based self-training.
+It is equivalent to YOLOX-based self-training, and you may be happy to avoid building up a YOLOX project.
+We placed our example raw GLIP prediction file to the path:```DATASET/coco/annotations/instances_train2017_0166.json```,this result get mAP = 0.166.
+Example instructions are following:
+```bash 
+python tools/train_net.py --config-file configs/pretrain/glip_Swin_L.yaml --train_label "DATASET/coco/annotations/instances_train2017_0166.json" --restart True --use-tensorboard 
+--override_output_dir OUTPUT_TRAIN_fanew MODEL.BACKBONE.FREEZE_CONV_BODY_AT 1 SOLVER.IMS_PER_BATCH 1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 4 TEST.DURING_TRAINING True TEST.IMS_PER_BATCH 1 SOLVER.FIND_UNUSED_PARAMETERS False SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 DATASETS.DISABLE_SHUFFLE True MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection AUGMENT.MULT_MIN_SIZE_TRAIN (800,) SOLVER.CHECKPOINT_PERIOD 100
+```
+Other example instructions : (you must install the transformer libiary from github_src as mentioned in Installation,because we change some layers and functions in transformer for better mAP score )
+```bash 
+python tools/train_net.py --config-file configs/pretrain/glip_Swin_L.yaml --train_label "/data2/wyj/GLIP/DATASET/coco/annotations/instances_train2017_0166.json" --restart True --use-tensorboard --override_output_dir OUTPUT_TRAIN_fanew MODEL.BACKBONE.FREEZE_CONV_BODY_AT 1 SOLVER.IMS_PER_BATCH 1 SOLVER.USE_AMP True SOLVER.MAX_ITER 500 TEST.DURING_TRAINING True TEST.IMS_PER_BATCH 1 SOLVER.FIND_UNUSED_PARAMETERS False SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 DATASETS.DISABLE_SHUFFLE True MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection AUGMENT.MULT_MIN_SIZE_TRAIN (800,) SOLVER.CHECKPOINT_PERIOD 100 SWINBLO 3 lang_adap_mlp 2
+```
 
-## Citing VLPM
+##Citation
 If you use VLPM in your work or wish to refer to the results published in this repo, please cite our paper:
 ```BibTeX
 
