@@ -19,7 +19,7 @@ Our project is developed based on [GLIP](https://github.com/microsoft/GLIP).
 cd sick/GLIP
 python setup.py develop
 ```
-3.[Optional] We recommend to install transformer libiary from source code , which enable us to change some function inside the transformer backbone.If you have installed transformer via pip and only want to reproduce the experiment result in our paper, you can also skip this step.This option is intended for further development.
+3.[Optional] We recommend to install ```transformers``` libiary from source code , which enable us to change some function inside the transformer backbone.If you have installed transformer via pip and only want to reproduce the experiment result in our paper, you can also skip this step.This option is intended for further development.
 You firstly need to uninstall transformer via pip or conda.
 Then:
 ```bash 
@@ -52,7 +52,7 @@ Example instructions are following:
 python tools/train_net.py --config-file configs/pretrain/glip_Swin_L.yaml --train_label "DATASET/coco/annotations/instances_train2017_0166.json" --restart True --use-tensorboard 
 --override_output_dir OUTPUT_TRAIN_fanew MODEL.BACKBONE.FREEZE_CONV_BODY_AT 1 SOLVER.IMS_PER_BATCH 1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 4 TEST.DURING_TRAINING True TEST.IMS_PER_BATCH 1 SOLVER.FIND_UNUSED_PARAMETERS False SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 DATASETS.DISABLE_SHUFFLE True MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection AUGMENT.MULT_MIN_SIZE_TRAIN (800,) SOLVER.CHECKPOINT_PERIOD 100
 ```
-Other example instructions : (you must install the transformer libiary from github_src as mentioned in Installation,because we change some layers and functions in transformer for better mAP score )
+Other example instructions : (you must install the ```transformers``` libiary from github_src as mentioned in Installation,because we change some layers and functions in transformer for better mAP score )
 ```bash 
 python tools/train_net.py --config-file configs/pretrain/glip_Swin_L.yaml --train_label "/data2/wyj/GLIP/DATASET/coco/annotations/instances_train2017_0166.json" --restart True --use-tensorboard --override_output_dir OUTPUT_TRAIN_fanew MODEL.BACKBONE.FREEZE_CONV_BODY_AT 1 SOLVER.IMS_PER_BATCH 1 SOLVER.USE_AMP True SOLVER.MAX_ITER 500 TEST.DURING_TRAINING True TEST.IMS_PER_BATCH 1 SOLVER.FIND_UNUSED_PARAMETERS False SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 DATASETS.DISABLE_SHUFFLE True MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection AUGMENT.MULT_MIN_SIZE_TRAIN (800,) SOLVER.CHECKPOINT_PERIOD 100 SWINBLO 3 lang_adap_mlp 2
 ```
