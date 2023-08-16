@@ -2,15 +2,15 @@
 
 <img src="VLPMNuD.png" width="800">
 
-Official implementation of Zero-shot Nuclei Detection via Visual-Language Pre-trained Models
+Official implementation of Zero-shot Nuclei Detection via Visual-Language Pre-trained Models.
 The original paper link is here:
-[arXiv link](to be update), [MICCAI link](to be update)
+[arXiv link](to be update), [MICCAI link](to be update).
 The proposed method has two process steps:
 1.Generating raw GLIP prediction result.
-2.Self-training via YOLOX 
+2.Self-training via YOLOX .
 This repository provides source code for the first step.Code for second step is [here](https://github.com/wuyongjianCODE/VLPMNuD_part2).
 ## Installation
-1.Create a Python environment based on ```requirements.txt``` file
+1.Create a Python environment based on ```requirements.txt``` file.
 
 2.Build up GLIP.
 Our project is developed based on [GLIP](https://github.com/microsoft/GLIP).
