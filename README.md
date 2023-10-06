@@ -64,10 +64,10 @@ python tools/train_net.py --config-file configs/pretrain/glip_Swin_L.yaml --trai
 If you use VLPM in your work or wish to refer to the results published in this repo, please cite our paper:
 ```BibTeX
 @inproceedings{wu2023zero,
-  title={Zero-shot Nuclei Detection via Visual-Language Pre-trained Models},
+  title={Zero-Shot Nuclei Detection via Visual-Language Pre-trained Models},
   author={Wu, Yongjian and Zhou, Yang and Saiyin, Jiya and Wei, Bingzheng and Lai, Maode and Shou, Jianzhong and Fan, Yubo and Xu, Yan},
   booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
-  pages={},
+  pages={693--703},
   year={2023},
   organization={Springer}
 }
