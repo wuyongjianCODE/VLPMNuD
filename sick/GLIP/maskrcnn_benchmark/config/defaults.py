@@ -25,7 +25,22 @@ _C.MODEL.BOX_ON = True
 _C.MODEL.MASK_ON = False
 _C.MODEL.KEYPOINT_ON = False
 _C.MODEL.DEVICE = "cuda"
-
+_C.use_lora_visual=0
+_C.use_lora_text=0
+_C.SWINBLO = 0
+_C.lang_adap_mlp = 0
+_C.VISUALIZE = False
+_C.vl_cross_att = 0
+_C.fuse_module_cross_att = 0
+_C.USE_CAM=False
+_C.PLOT_GTBOX=False
+_C.vpt_only=0
+_C.cpt_layers=[0,1,2,3,4,5,6,7]
+_C.pt4_tokens=0
+_C.froze_fuse=0
+_C.FROZEE_SWINT=False
+_C.FROZEE_BERT=False
+_C.generalized_vl=0
 _C.MODEL.META_ARCHITECTURE = "GeneralizedRCNN"
 
 _C.MODEL.RPN_ARCHITECTURE = "RPN"
