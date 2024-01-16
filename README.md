@@ -42,7 +42,7 @@ python tools/test_grounding_net_wuap.py --config-file configs/pretrain/glip_Swin
 --prompt 'rectangular black nuclei. circle black nuclei. spherical black nuclei. rectangular dark purple nuclei. circle dark purple nuclei. spherical dark purple nuclei.' TEST.IMS_PER_BATCH 1 MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR OUTPUT
 ```
 Caution: ```--prompt``` param here gives an example prompt obtained from [blip](to be update), you can also input other prompts.
-A JSON file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in the range [0.15, 0.2]. Then you can use the predicted result (i.e. the json file) to run a self-training algorithm, and you will get a near SOTA score (range [0.4, 0.45]). We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2).
+A JSON file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in the range [0.15, 0.2]. Then you can use the predicted result (i.e. the json file) to run a self-training algorithm, and you will get a near SOTA score (range [0.4, 0.45]). We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2) , which is YOLOX-based and used in our paper. You can choose to use YOLOX-based self-training method or the following "optional" self-training method. 
 
 ## [Optional] Self-Training GLIP using generated raw GLIP prediction
 We provide an alternative way to get near SOTA score, in case that you feel YOLOX-based self-training process too complicate and labor-consuming.
