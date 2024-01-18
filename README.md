@@ -45,7 +45,7 @@ Caution: ```--prompt``` param here gives an example prompt obtained from [blip](
 A JSON file recording all bbox will be generated in ```./jsonfiles```.Normally, the mAP score of raw glip should be in the range [0.15, 0.2]. Then you can use the predicted result (i.e. the json file) to run a self-training algorithm, and you will get a near SOTA score (range [0.4, 0.45]). We provide our self-training source code [here](https://github.com/wuyongjianCODE/VLPMNuD_part2) , which is YOLOX-based and used in our paper. You can choose to use YOLOX-based self-training method or the following "optional" self-training method. 
 
 ## [Optional] Self-Training GLIP using generated raw GLIP prediction
-We provide an alternative way to get near SOTA score, in case that you feel YOLOX-based self-training process too complicate and labor-consuming.
+We provide an alternative way to get near SOTA score, in case that you feel YOLOX-based self-training process too complicate and labor-consuming.But you need to make sure each of your gpus be bigger than 16G.
 You can feed raw GLIP predict back to GLIP itself, train a new GLIP model with unchanged pre-trained weights(i.e. the glip_large_model.pth), and will get a better score, probably mAP in the range [0.35, 0.45]. You can repeat this process again and again. This optional method is actually GLIP-based self-training, rather than YOLOX-based self-training.
 It is equivalent to YOLOX-based self-training, and you may be happy to avoid building up a YOLOX project.
 We placed our example raw GLIP prediction file to the path:```DATASET/coco/annotations/instances_train2017_0166.json```, this result get mAP = 0.166.
