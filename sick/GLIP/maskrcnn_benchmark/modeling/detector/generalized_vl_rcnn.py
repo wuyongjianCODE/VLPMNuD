@@ -306,10 +306,21 @@ class GeneralizedVLRCNN(nn.Module):
                 language_dict_features["mlm_labels"] = mlm_labels
 
         # visual embedding
-        swint_feature_c4 = None
-        FROZEE_SWINT = True
-        USE_ADAPTER = True
-        USE_ADAPTER_conv11 = False
+        G_vl=self.cfg.generalized_vl
+        if G_vl:
+            swint_feature_c4 = None
+            FROZEE_SWINT = True
+            USE_ADAPTER = True
+            USE_ADAPTER_conv11 = False
+        else:
+            swint_feature_c4 = None
+            FROZEE_SWINT = False
+            USE_ADAPTER = False
+            USE_ADAPTER_conv11 = False
+        # swint_feature_c4 = None
+        # FROZEE_SWINT = True
+        # USE_ADAPTER = True
+        # USE_ADAPTER_conv11 = False
         if FROZEE_SWINT:
             # with torch.no_grad():  # wyj : add to freeze visual backbone!!!!!!!!!!!!!!!!!!!
             for name,param in self.backbone.named_parameters():
